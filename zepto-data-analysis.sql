@@ -1,7 +1,6 @@
 /*====================================================================
                     ZEPTO DATA ANALYSIS USING SQL
 ======================================================================
-
 Project : Zepto Grocery Data Analysis
 Database: PostgreSQL
 
@@ -9,7 +8,6 @@ Description:
 This project analyzes Zepto's product inventory to identify pricing
 patterns, discount strategies, inventory status, and category-level
 business insights using SQL.
-
 ====================================================================*/
 
 
@@ -35,10 +33,9 @@ CREATE TABLE zepto(
 );
 
 -- Import CSV (UTF-8 Encoding)
--- COPY zepto(...)
--- FROM 'path/to/zepto.csv'
--- CSV HEADER;
-
+--   COPY zepto(...)
+--   FROM 'path/to/zepto-product-dataset.csv'
+--   CSV HEADER;
 
 /*====================================================================
 2. DATA EXPLORATION
@@ -52,9 +49,7 @@ FROM zepto;
 
 -- Q2. Preview the dataset
 
-SELECT *
-FROM zepto;
-
+SELECT * FROM zepto;
 
 -- Q3. Check for missing values
 
@@ -82,7 +77,6 @@ FROM zepto
 WHERE mrp = 0
    OR discountedSellingPrice = 0;
 
-
 -- Q5. Remove invalid records
 
 DELETE
@@ -103,7 +97,6 @@ SET
 4. BUSINESS ANALYSIS
 ====================================================================*/
 
-
 -- Business Question 1
 -- Which products offer the highest discounts?
 
@@ -115,8 +108,6 @@ SELECT
 FROM zepto
 ORDER BY discountPercent DESC
 LIMIT 10;
-
-
 
 -- Business Question 2
 -- Which high-priced products are currently out of stock?
@@ -130,8 +121,6 @@ WHERE outOfStock = TRUE
 ORDER BY mrp DESC
 LIMIT 10;
 
-
-
 -- Business Question 3
 -- Which product categories generate the highest potential revenue?
 
@@ -141,8 +130,6 @@ SELECT
 FROM zepto
 GROUP BY category
 ORDER BY potential_revenue DESC;
-
-
 
 -- Business Question 4
 -- Which premium products (MRP > ₹500) have relatively low discounts?
@@ -156,8 +143,6 @@ WHERE mrp > 500
 ORDER BY mrp DESC,
          discountPercent ASC;
 
-
-
 -- Business Question 5
 -- Which categories provide the highest average discounts?
 
@@ -168,8 +153,6 @@ FROM zepto
 GROUP BY category
 ORDER BY average_discount DESC
 LIMIT 5;
-
-
 
 -- Business Question 6
 -- Which products offer the best value based on price per gram?
@@ -182,8 +165,6 @@ SELECT
 FROM zepto
 WHERE weightInGms > 0
 ORDER BY price_per_gram;
-
-
 
 -- Business Question 7
 -- Categorize products based on package weight
@@ -198,8 +179,6 @@ SELECT
     END AS weight_category
 FROM zepto;
 
-
-
 -- Business Question 8
 -- Calculate total inventory weight available in each category
 
@@ -210,7 +189,6 @@ SELECT
 FROM zepto
 GROUP BY category
 ORDER BY inventory_weight_kg DESC;
-
 
 /*====================================================================
 END OF PROJECT
